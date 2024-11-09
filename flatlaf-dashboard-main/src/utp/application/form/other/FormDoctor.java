@@ -1,10 +1,12 @@
 package utp.application.form.other;
 
 import Hospital.Dao.DoctorDAO;
+import Hospital.Modelo.CDoctor;
 import java.awt.Image;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -14,14 +16,26 @@ import javax.swing.JOptionPane;
  */
 public class FormDoctor extends javax.swing.JPanel {
     
-    String filename=null;
-    byte[] doctor_image=null;
+    String filename;
+    byte[] doctor_image;
     public FormDoctor() {
         initComponents();
         DoctorDAO doctor=new DoctorDAO();
         doctor.MostrarTablaDoctor(JTablaMostrarDoctor);
     }
 
+    public void limpiarcampos(){
+        txtCodDoc.setText("");
+        txtNomDoc.setText("");
+        jFechaNa.setDate(null);
+        txtTele.setText("");
+        txtDire.setText("");
+        txtIdUser.setText("");
+        txtEspe.setText("");
+        txtFotoRuta.setText("");
+        ImageIcon icono=new ImageIcon("src/utp/icon/jpg/foto_fondo.jpg");
+        lblMostrarFoto.setIcon(icono);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -45,13 +59,14 @@ public class FormDoctor extends javax.swing.JPanel {
         lblDire = new javax.swing.JLabel();
         txtDire = new javax.swing.JTextField();
         lblFoto = new javax.swing.JLabel();
-        txtFotoLink = new javax.swing.JTextField();
+        txtFotoRuta = new javax.swing.JTextField();
         lblID = new javax.swing.JLabel();
         txtIdUser = new javax.swing.JTextField();
         lblEspe = new javax.swing.JLabel();
         txtEspe = new javax.swing.JTextField();
         lblMostrarFoto = new javax.swing.JLabel();
         btnBuscarFoto = new javax.swing.JButton();
+        lblID1 = new javax.swing.JLabel();
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
         jLabel5.setText("CRUD Doctor");
@@ -114,7 +129,13 @@ public class FormDoctor extends javax.swing.JPanel {
 
         lblEspe.setText("Especialidad:");
 
+        lblMostrarFoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMostrarFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/icon/jpg/foto_fondo.jpg"))); // NOI18N
         lblMostrarFoto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblMostrarFoto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblMostrarFoto.setMaximumSize(new java.awt.Dimension(120, 149));
+        lblMostrarFoto.setMinimumSize(new java.awt.Dimension(120, 149));
+        lblMostrarFoto.setPreferredSize(new java.awt.Dimension(120, 149));
 
         btnBuscarFoto.setText("Buscar");
         btnBuscarFoto.addActionListener(new java.awt.event.ActionListener() {
@@ -122,6 +143,8 @@ public class FormDoctor extends javax.swing.JPanel {
                 btnBuscarFotoActionPerformed(evt);
             }
         });
+
+        lblID1.setText("Ruta:");
 
         javax.swing.GroupLayout panelTransparent1Layout = new javax.swing.GroupLayout(panelTransparent1);
         panelTransparent1.setLayout(panelTransparent1Layout);
@@ -167,15 +190,16 @@ public class FormDoctor extends javax.swing.JPanel {
                             .addGroup(panelTransparent1Layout.createSequentialGroup()
                                 .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(14, 14, 14)
-                                .addComponent(lblMostrarFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(lblMostrarFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
                                 .addComponent(btnBuscarFoto))))
                     .addGroup(panelTransparent1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelTransparent1Layout.createSequentialGroup()
-                                .addGap(77, 77, 77)
-                                .addComponent(txtFotoLink, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblID1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtFotoRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelTransparent1Layout.createSequentialGroup()
                                 .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -184,8 +208,8 @@ public class FormDoctor extends javax.swing.JPanel {
                                 .addComponent(lblEspe, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtEspe, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1)
+                .addGap(126, 126, 126)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelTransparent1Layout.setVerticalGroup(
@@ -217,12 +241,12 @@ public class FormDoctor extends javax.swing.JPanel {
                             .addComponent(txtDire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelTransparent1Layout.createSequentialGroup()
-                                .addComponent(lblFoto)
-                                .addGap(0, 133, Short.MAX_VALUE))
-                            .addComponent(lblMostrarFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(txtFotoLink, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblFoto)
+                            .addComponent(lblMostrarFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtFotoRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblID1))
                         .addGap(18, 18, 18)
                         .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblID)
@@ -238,7 +262,7 @@ public class FormDoctor extends javax.swing.JPanel {
                             .addComponent(jbtnEliminar))
                         .addContainerGap())
                     .addGroup(panelTransparent1Layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
+                        .addGap(120, 120, 120)
                         .addComponent(btnBuscarFoto)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -262,18 +286,31 @@ public class FormDoctor extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnInsertar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnInsertar1ActionPerformed
-        DoctorDAO objDoc=new DoctorDAO();
-        objDoc.InsertarDoctor(txtNomDoc, jFechaNa, txtTele, txtDire, txtIdUser, txtEspe, doctor_image);
-        objDoc.MostrarTablaDoctor(JTablaMostrarDoctor);
-        txtCodDoc.setText("");
-        txtNomDoc.setText("");
-        jFechaNa.setDate(null);
-        txtTele.setText("");
-        txtDire.setText("");
-        txtIdUser.setText("");
-        txtEspe.setText("");
-//        lblMostrarFoto.setText("");
-        
+        if (txtNomDoc.getText().isEmpty() || txtTele.getText().isEmpty() || txtDire.getText().isEmpty() ||
+             txtIdUser.getText().isEmpty() || txtEspe.getText().isEmpty() || doctor_image == null) {
+            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
+        }else{
+            CDoctor doct=new CDoctor();
+            doct.Nombre=txtNomDoc.getText();
+            doct.Fecha_Nacimiento=jFechaNa.getDate();
+            doct.Telefono=txtTele.getText();
+            doct.Direccion=txtDire.getText();
+            doct.Id_Usuario=Integer.parseInt(txtIdUser.getText());
+            doct.Especialidad=txtEspe.getText();
+            try {
+                File ruta=new File(txtFotoRuta.getText());
+                byte[] icono=new byte[(int)ruta.length()];
+                InputStream input= new FileInputStream(ruta);
+                input.read(icono);
+                doct.setFoto(icono);                
+            } catch (Exception e) {
+                doct.setFoto(null);
+            }
+            DoctorDAO objDoc=new DoctorDAO();
+            objDoc.InsertarDoctor(txtNomDoc, jFechaNa, txtTele, txtDire, txtIdUser, txtEspe, doctor_image);
+            objDoc.MostrarTablaDoctor(JTablaMostrarDoctor);        
+        }  
+        limpiarcampos();
     }//GEN-LAST:event_jbtnInsertar1ActionPerformed
 
     private void jbtneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtneditarActionPerformed
@@ -300,23 +337,31 @@ public class FormDoctor extends javax.swing.JPanel {
     }//GEN-LAST:event_JTablaMostrarDoctorMouseClicked
 
     private void btnBuscarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarFotoActionPerformed
-        JFileChooser chooser=new JFileChooser();
+        JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
-        File f=chooser.getSelectedFile();
-        filename= f.getAbsolutePath();
-        ImageIcon imageicon=new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(lblMostrarFoto.getWidth(),lblMostrarFoto.getHeight(),Image.SCALE_SMOOTH));
-        lblMostrarFoto.setIcon(imageicon);
+        File file = chooser.getSelectedFile();
+        filename = file.getAbsolutePath();
+        txtFotoRuta.setText(filename);
+
+        // Mostrar imagen en el lblMostrarFoto
+//        Image image=new ImageIcon(filename).getImage();
+//        ImageIcon icon= new ImageIcon(image.getScaledInstance(lblMostrarFoto.getWidth(), lblMostrarFoto.getHeight(), Image.SCALE_SMOOTH));
+        ImageIcon icon = new ImageIcon(filename);
+        Image image = icon.getImage().getScaledInstance(lblMostrarFoto.getWidth(), lblMostrarFoto.getHeight(), Image.SCALE_SMOOTH);
+        lblMostrarFoto.setIcon(new ImageIcon(image));
+
+        // Guardar la imagen como bytes
         try {
-            File image=new File(filename);
-            FileInputStream fis=new FileInputStream(image);
-            ByteArrayOutputStream bos=new ByteArrayOutputStream();
-            byte[] buf=new byte[1024];
-            for (int readNum = 0; (readNum =fis.read(buf))!=-1; ) {
-                bos.write(buf,0,readNum);
+            File imageFile = new File(filename);
+            FileInputStream fis = new FileInputStream(imageFile);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            for (int readNum; (readNum = fis.read(buffer)) != -1;) {
+                bos.write(buffer, 0, readNum);
             }
-            doctor_image=bos.toByteArray();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+            doctor_image = bos.toByteArray();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error al cargar la imagen: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnBuscarFotoActionPerformed
 
@@ -337,6 +382,7 @@ public class FormDoctor extends javax.swing.JPanel {
     private javax.swing.JLabel lblFechaNa;
     private javax.swing.JLabel lblFoto;
     private javax.swing.JLabel lblID;
+    private javax.swing.JLabel lblID1;
     private javax.swing.JLabel lblMostrarFoto;
     private javax.swing.JLabel lblNombres;
     private javax.swing.JLabel lblTele;
@@ -344,7 +390,7 @@ public class FormDoctor extends javax.swing.JPanel {
     private javax.swing.JTextField txtCodDoc;
     private javax.swing.JTextField txtDire;
     private javax.swing.JTextField txtEspe;
-    private javax.swing.JTextField txtFotoLink;
+    private javax.swing.JTextField txtFotoRuta;
     private javax.swing.JTextField txtIdUser;
     private javax.swing.JTextField txtNomDoc;
     private javax.swing.JTextField txtTele;

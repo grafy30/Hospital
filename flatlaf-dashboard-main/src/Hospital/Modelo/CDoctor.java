@@ -1,4 +1,4 @@
-package Hospital.Modelo;
+  package Hospital.Modelo;
 
 import java.util.Date;
 
@@ -6,15 +6,19 @@ import java.util.Date;
  * @author Wilson
  */
 public class CDoctor {
-    private int id_Doctor;
-    private String Nombre;
-    private Date Fecha_Nacimiento;
-    private String Telefono;
-    private String Direccion;
-    private byte [] Foto;
-    private int Id_Usuario;
-    private String Especialidad;
+    public int id_Doctor;
+    public String Nombre;
+    public Date Fecha_Nacimiento;
+    public String Telefono;
+    public String Direccion;
+    public byte [] Foto;
+    public int Id_Usuario;
+    public String Especialidad;
 
+    public CDoctor(){
+        
+    }
+            
     public int getId_Doctor() {
         return id_Doctor;
     }
@@ -79,15 +83,15 @@ public class CDoctor {
         this.Especialidad = Especialidad;
     }
 
-    public CDoctor(int id_Doctor, String Nombre, Date Fecha_Nacimiento, String Telefono, String Direccion, byte[] Foto, int Id_Usuario, String Especialidad) {
+    public CDoctor(int id_Doctor, String Nombre, Date Fecha_Nacimiento, String Telefono, String Direccion, int Id_Usuario, String Especialidad, byte[] Foto) {
         this.id_Doctor = id_Doctor;
         this.Nombre = Nombre;
         this.Fecha_Nacimiento = Fecha_Nacimiento;
         this.Telefono = Telefono;
         this.Direccion = Direccion;
-        this.Foto = Foto;
         this.Id_Usuario = Id_Usuario;
         this.Especialidad = Especialidad;
+        this.Foto = Foto;
     }
     
 }

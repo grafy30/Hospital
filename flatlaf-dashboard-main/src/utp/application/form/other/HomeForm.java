@@ -41,7 +41,6 @@ public class HomeForm extends javax.swing.JPanel {
         header1 = new Hospital.Vista.Swing.Header();
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(4, 72, 210));
         jLabel1.setText("Dashboard / Home");
 
         card1.setColorGradient(new java.awt.Color(200, 101, 243));
