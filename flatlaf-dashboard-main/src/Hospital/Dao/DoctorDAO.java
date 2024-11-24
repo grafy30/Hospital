@@ -32,7 +32,7 @@ public class DoctorDAO {
             // Recorrer los resultados
             while (rs.next()) {
                 CDoctor doc = new CDoctor(
-                rs.getInt("Id_Doctor"),                        // ID del doctor
+                rs.getInt("Id_Doctor"),                        // ID del doctorr
                 rs.getString("Nombre"),                        // Nombre
                 rs.getDate("Fecha_Nacimiento"),                // Fecha de Nacimiento
                 rs.getString("Telefono"),                      // Teléfono
